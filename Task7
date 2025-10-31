@@ -1,0 +1,39 @@
+class MonkeyBananaProblem:
+    def __init__(self):  # <-- fixed: double underscores
+        self.state = {
+            "monkey-position": "floor",
+            "box-position": "corner",
+            "banana-position": "ceiling",
+            "monkey-on-box": False,
+            "monkey-has-banana": False
+        }
+
+    def move_box(self):
+        if self.state["monkey-position"] == "floor" and self.state["box-position"] == "corner":
+            self.state["box-position"] = "under-banana"
+            self.state["monkey-position"] = "under-banana"
+            print("Monkey moves box under banana")
+
+    def climb_box(self):
+        if self.state["monkey-position"] == "under-banana" and self.state["box-position"] == "under-banana":
+            self.state["monkey-on-box"] = True
+            print("Monkey climbs onto the box")
+
+    def grab_banana(self):
+        if self.state["monkey-on-box"] and self.state["banana-position"] == "ceiling":
+            self.state["monkey-has-banana"] = True
+            print("Monkey grabs the banana")
+
+    def solve(self):
+        self.move_box()
+        self.climb_box()
+        self.grab_banana()
+        if self.state["monkey-has-banana"]:
+            print("Goal Achieved: Monkey has banana")
+        else:
+            print("Goal not achieved")
+
+
+# Run the program
+problem = MonkeyBananaProblem()
+problem.solve()
